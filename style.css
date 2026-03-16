@@ -1,3 +1,9 @@
+/* 
+    Project: Alpha-Halal Personal Portfolio
+    Lead Engineer: Mejba
+    Theme: Cyber-Noir Minimalist
+*/
+
 /* --- 1. Variables & Global Resets --- */
 :root {
     --bg-dark: #0f172a;
@@ -43,14 +49,14 @@ body {
 
 .text-center { text-align: center; }
 
-/* --- 2. Navigation --- */
+/* --- 2. Navigation (Glassmorphism) --- */
 .glass-nav {
     position: fixed;
     top: 0;
     width: 100%;
-    padding: 1.5rem 0;
-    background: rgba(15, 23, 42, 0.8);
-    backdrop-filter: blur(12px);
+    padding: 1.2rem 0;
+    background: rgba(15, 23, 42, 0.85);
+    backdrop-filter: blur(15px);
     z-index: 1000;
     border-bottom: 1px solid var(--glass);
 }
@@ -66,6 +72,7 @@ body {
     font-weight: 800;
     text-decoration: none;
     color: var(--text-main);
+    letter-spacing: 1px;
 }
 
 .logo span { color: var(--accent); }
@@ -85,40 +92,51 @@ body {
 
 .nav-links a:hover { color: var(--accent); }
 
-.menu-toggle { display: none; cursor: pointer; font-size: 1.5rem; }
+.menu-toggle { display: none; cursor: pointer; font-size: 1.5rem; color: var(--accent); }
 
 /* --- 3. Hero Section --- */
 .hero {
-    height: 100vh;
+    min-height: 100vh;
     display: flex;
     align-items: center;
-    padding-top: 5rem;
+    padding-top: 6rem;
 }
 
 .hero-container {
     display: grid;
     grid-template-columns: 1.2fr 0.8fr;
     align-items: center;
-    gap: 3rem;
-}
-
-h1 {
-    font-size: 4rem;
-    font-weight: 800;
-    margin-bottom: 1rem;
-}
-
-.dynamic-text {
-    font-size: 1.3rem;
-    color: var(--text-dim);
-    margin-bottom: 2rem;
+    gap: 4rem;
 }
 
 .accent-text {
     color: var(--accent);
     font-weight: 600;
     text-transform: uppercase;
-    letter-spacing: 2px;
+    letter-spacing: 3px;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+}
+
+h1 {
+    font-size: 5rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+    line-height: 1;
+}
+
+.dynamic-text {
+    font-size: 1.4rem;
+    color: var(--text-dim);
+    margin-bottom: 2rem;
+    font-weight: 400;
+}
+
+.hero-subtext {
+    color: var(--text-dim);
+    margin-bottom: 2.5rem;
+    font-size: 1.1rem;
+    max-width: 500px;
 }
 
 .cta-group {
@@ -127,16 +145,23 @@ h1 {
 }
 
 .btn {
-    padding: 0.8rem 2rem;
-    border-radius: 6px;
+    padding: 1rem 2.5rem;
+    border-radius: 8px;
     text-decoration: none;
     font-weight: 600;
     transition: var(--transition);
+    cursor: pointer;
 }
 
 .btn-primary {
     background-color: var(--accent);
     color: var(--bg-darker);
+    border: none;
+}
+
+.btn-primary:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(56, 189, 248, 0.3);
 }
 
 .btn-secondary {
@@ -144,135 +169,146 @@ h1 {
     color: var(--accent);
 }
 
-/* --- 4. Profile Image & Blob Logic (The Fix) --- */
+.btn-secondary:hover { background: rgba(56, 189, 248, 0.1); }
+
+/* --- 4. THE IMAGE FIX (The Precision Core) --- */
 .hero-visual {
     position: relative;
+    width: 100%;
+    height: 500px; /* ফিক্সড হাইট যাতে কন্ট্রোল করা যায় */
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 .profile-img {
-    width: 320px; /* ফিক্সড চওড়া */
-    height: 380px; /* ফিক্সড উচ্চতা */
-    object-fit: cover; /* ফেস ঠিক রাখবে */
-    border-radius: 24px; /* আধুনিক কার্ভ */
-    border: 2px solid var(--accent);
+    width: 380px; /* ছবির চওড়া */
+    height: 100%; /* হাইট ফ্রেমের সমান */
+    object-fit: cover; /* চেহারা চ্যাপ্টা হবে না */
+    object-position: center 15%; /* এটিই আপনার ফেসকে ফোকাসে আনবে */
+    border-radius: 30px;
+    border: 3px solid var(--accent);
     z-index: 10;
-    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    box-shadow: 0 30px 60px rgba(0,0,0,0.6);
     transition: var(--transition);
 }
 
 .profile-img:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 0 30px var(--accent);
+    transform: scale(1.02);
+    border-color: #fff;
 }
 
 .blob {
     position: absolute;
-    width: 450px;
-    height: 450px;
-    background: linear-gradient(45deg, var(--accent), #1e40af);
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, var(--accent) 0%, transparent 70%);
     filter: blur(80px);
-    opacity: 0.2;
+    opacity: 0.15;
     z-index: 1;
-    animation: morph 8s ease-in-out infinite;
+    animation: pulse 5s ease-in-out infinite;
 }
 
-@keyframes morph {
-    0%, 100% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; }
-    50% { border-radius: 50% 50% 20% 80% / 25% 80% 20% 75%; }
+@keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 0.15; }
+    50% { transform: scale(1.1); opacity: 0.25; }
 }
 
-/* --- 5. Sections Styling --- */
+/* --- 5. About & Skills --- */
 .section-title {
-    font-size: 2.5rem;
-    margin-bottom: 3rem;
+    font-size: 2.8rem;
+    margin-bottom: 3.5rem;
     position: relative;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -15px;
+    left: 0;
+    width: 60px;
+    height: 4px;
+    background: var(--accent);
+}
+
+.about-content p {
+    font-size: 1.15rem;
+    margin-bottom: 1.5rem;
+    color: var(--text-dim);
 }
 
 .skills-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 3rem;
 }
 
-.tags { display: flex; flex-wrap: wrap; gap: 0.8rem; margin-top: 1rem; }
+.skill-category h3 { color: var(--accent); margin-bottom: 1.5rem; }
+
+.tags { display: flex; flex-wrap: wrap; gap: 0.8rem; }
 .tags span {
     background: var(--glass);
-    padding: 0.4rem 1rem;
+    padding: 0.6rem 1.2rem;
     border-radius: 50px;
-    font-size: 0.85rem;
+    font-size: 0.9rem;
     border: 1px solid rgba(255,255,255,0.05);
+    transition: var(--transition);
 }
 
+.tags span:hover { border-color: var(--accent); color: var(--accent); }
+
+/* --- 6. Projects --- */
 .project-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2.5rem;
 }
 
 .project-card {
     background: var(--bg-darker);
+    border-radius: 16px;
     border: 1px solid var(--glass);
-    border-radius: 12px;
     overflow: hidden;
     transition: var(--transition);
 }
 
+.project-card:hover { transform: translateY(-12px); border-color: var(--accent); }
+
 .project-img-placeholder {
-    height: 180px;
+    height: 200px;
     background: #1e293b;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 2.5rem;
+    font-size: 3.5rem;
     color: var(--accent);
 }
 
-.project-info { padding: 1.5rem; }
+.project-info { padding: 2rem; }
+.project-info h3 { margin-bottom: 0.8rem; }
+.project-info p { color: var(--text-dim); margin-bottom: 1.5rem; }
 
-/* --- 6. Contact & Footer --- */
+.view-link {
+    text-decoration: none;
+    color: var(--accent);
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* --- 7. Contact & Footer --- */
 .contact-wrapper {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 3rem;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 5rem;
+    align-items: center;
 }
 
-.contact-form { display: grid; gap: 1rem; }
+.contact-form { display: grid; gap: 1.2rem; }
 .contact-form input, .contact-form textarea {
-    background: var(--bg-darker);
+    background: var(--bg-dark);
     border: 1px solid var(--glass);
-    padding: 1rem;
+    padding: 1.2rem;
     color: white;
-    border-radius: 6px;
-}
-
-.social-links { display: flex; gap: 1.5rem; font-size: 1.8rem; margin-top: 1rem; }
-.social-links a { color: var(--text-dim); transition: var(--transition); }
-.social-links a:hover { color: var(--accent); }
-
-footer { padding: 3rem 0; border-top: 1px solid var(--glass); margin-top: 4rem; }
-
-/* --- 7. Animations & Mobile Responsiveness --- */
-.reveal {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: all 0.8s ease-out;
-}
-
-.reveal.active {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-@media (max-width: 768px) {
-    .hero-container { grid-template-columns: 1fr; text-align: center; }
-    h1 { font-size: 3rem; }
-    .hero-visual { order: -1; margin-bottom: 2rem; }
-    .profile-img { width: 260px; height: 300px; }
-    .nav-links { display: none; }
-    .menu-toggle { display: block; }
-    .contact-wrapper { grid-template-columns: 1fr; }
-    .cta-group { justify-content: center; }
-}
+    border-radius: 8p
