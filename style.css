@@ -318,3 +318,56 @@ footer { padding: 3rem 0; border-top: 1px solid var(--glass); color: var(--text-
     opacity: 1;
     transform: translateY(0);
 }
+/* --- PROFILE IMAGE OPTIMIZATION --- */
+
+.hero-visual {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.profile-img {
+    width: 320px; /* ছবির চওড়া */
+    height: 320px; /* ছবির উচ্চতা */
+    object-fit: cover; /* ছবির চেহারা ঠিক রাখবে, চ্যাপ্টা হবে না */
+    border-radius: 30px; /* কোনাগুলো হালকা গোল করবে */
+    border: 3px solid var(--accent); /* আপনার ইলেকট্রিক ব্লু বর্ডার */
+    position: relative;
+    z-index: 5;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 20px rgba(56, 189, 248, 0.2);
+    transition: var(--transition);
+}
+
+.profile-img:hover {
+    transform: scale(1.02) translateY(-5px);
+    border-color: #fff;
+    box-shadow: 0 0 30px var(--accent);
+}
+
+/* ছবির পেছনের সেই এনিমেটেড ব্লব (Blob) টাকে ছবির নিচে সেট করা */
+.blob {
+    position: absolute;
+    z-index: 1;
+    width: 400px;
+    height: 400px;
+    filter: blur(60px);
+    opacity: 0.3;
+}
+
+/* মোবাইল ফোনের জন্য ছোট করা */
+@media (max-width: 768px) {
+    .profile-img {
+        width: 250px;
+        height: 250px;
+        margin-top: 2rem;
+    }
+    .blob {
+        width: 300px;
+        height: 300px;
+    }
+    .hero-visual {
+        display: block;
+        text-align: center;
+    }
+}
